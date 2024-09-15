@@ -52,9 +52,11 @@ export async function createGoalCompletion({
 
   const insertResult = await db
     .insert(goalCompletions)
-    .values({ goalId })
+    .values({ goalId, createdAt: dayjs().toDate() })
     .returning();
   const goalCompletion = insertResult[0];
+
+  console.log(sql);
 
   return {
     goalCompletion,
